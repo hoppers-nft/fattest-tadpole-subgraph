@@ -1,0 +1,22 @@
+type Cycle @entity {
+  id: ID!
+  cycle: Int!
+  currentWinner: Bytes! # address
+  currentWinnerPoints: BigInt!
+  competitors: [Competitor!] @derivedFrom (field: "cycle")
+}
+
+type CurrentCycle @entity {
+  id: ID! # CurrentCycle
+  cycle: Int!
+
+}
+
+type Competitor @entity {
+  id: ID! # addy + _ + Currentcycle
+  address : Bytes!
+  burnedCurrentCycle: BigInt!
+  stakedTadpole: Int!
+  cycle: Cycle!
+  cycleNumber: Int!
+}
