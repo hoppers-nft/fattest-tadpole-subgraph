@@ -24,18 +24,10 @@ export function handleFlyAdded(event: FlyAdded ): void {
     user.cycleNumber = cycle;
     user.cycle = cycle.toString();
     user.address = event.transaction.from;
-    const userIdBefore = event.transaction.from.toHex() + '_' + (cycle-1).toString();
-    let userBefore = Competitor.load(userIdBefore);
-    if(userBefore) {
-      user.stakedTadpole = userBefore.stakedTadpole; 
-   }
-   else {
-     log.error("Competitor info from prev cycle doesnt exist!", []);
-     return;
-   }
+    user.stakedTadpole = event.params.tokenId.toI32();
   }
-  user!.burnedCurrentCycle = user!.burnedCurrentCycle.plus(event.params.amount);
-  user!.save();
+  user.burnedCurrentCycle = user.burnedCurrentCycle.plus(event.params.amount);
+  user.save();
 
 }
 

@@ -27,7 +27,7 @@ dataSources:
           handler: handleUpdatedOwner
         - event: WinnerChanged((address,uint256))
           handler: handleWinnerChanged
-        - event: FlyAdded(uint256)
+        - event: FlyAdded(uint256,uint256)
           handler: FlyAddedHandler   
         - event: Entered(uint256)
           handler: handleEntered
