@@ -6,7 +6,8 @@ dataSources:
     name: FattestTadpole
     network: fuji
     source:
-      address: "0x7A5b72c2C159fB8F1a8B2bDFA5A5ac881F66222f"
+      address: "0x56da06b93c7f5adf4e71a05355396b7b30eada6a"
+      startBlock: 10348716
       abi: FattestTadpole
     mapping:
       kind: ethereum/events
@@ -28,7 +29,7 @@ dataSources:
         - event: WinnerChanged((address,uint256))
           handler: handleWinnerChanged
         - event: FlyAdded(uint256,uint256)
-          handler: FlyAddedHandler   
+          handler: handleFlyAdded   
         - event: Entered(uint256)
           handler: handleEntered
         - event: Exited(uint256)
