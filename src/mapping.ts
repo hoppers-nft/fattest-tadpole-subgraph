@@ -89,4 +89,9 @@ function IncrementCurrentCycle(): void {
     current.cycle += 1;
     current.save();
   }
+  else {
+    current = new CurrentCycle("CurrentCycle");
+    current.cycle = 1;
+    current.save();
+  }
 }
