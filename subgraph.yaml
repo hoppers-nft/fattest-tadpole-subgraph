@@ -6,8 +6,8 @@ dataSources:
     name: FattestTadpole
     network: fuji
     source:
-      address: "0x496301Cf5a528d32F7c1EA944b0FD27c5F89664a"
-      startBlock: 10586003
+      address: "0xD9550a060F2002257c4a30CF0268d9931c9a7d87"
+      startBlock: 15989913
       abi: FattestTadpole
     mapping:
       kind: ethereum/events
