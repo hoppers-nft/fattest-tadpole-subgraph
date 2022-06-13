@@ -19,4 +19,5 @@ type Competitor @entity {
   stakedTadpole: Int!
   cycle: Cycle!
   cycleNumber: Int!
+  points : BigInt!
 }

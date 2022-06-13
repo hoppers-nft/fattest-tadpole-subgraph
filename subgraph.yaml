@@ -21,6 +21,8 @@ dataSources:
       abis:
         - name: FattestTadpole
           file: ./abis/FattestTadpole.json
+        - name: TadpoleNFT
+          file: ./abis/TadpoleNFT.json  
       eventHandlers:
         - event: CycleFinished(uint256,(address,uint256))
           handler: handleCycleFinished

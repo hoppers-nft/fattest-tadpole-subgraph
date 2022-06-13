@@ -1,4 +1,4 @@
-import { BigInt, log, store } from "@graphprotocol/graph-ts"
+import { Address, BigInt, Bytes, log, store } from "@graphprotocol/graph-ts"
 import {
   CycleFinished,
   UpdatedOwner,
@@ -8,12 +8,16 @@ import {
   Exited
   
 } from "../generated/FattestTadpole/FattestTadpole"
+import {
+  TadpoleNFT
+  
+} from "../generated/FattestTadpole/TadpoleNFT"
 import { CurrentCycle, Cycle, Competitor } from "../generated/schema"
 
 export function handleCycleFinished(event: CycleFinished): void {
   IncrementCurrentCycle();
 }
-
+const TadpoleAddress = Address.fromString("0x9cd44c2e3b059324fA131f117Dec9e89ca1632dF");
 export function handleFlyAdded(event: FlyAdded ): void {
   const cycle = getOrCreateCurrentCycle().cycle;
   const userId = event.transaction.from.toHex() + '_' + cycle.toString();
@@ -25,8 +29,16 @@ export function handleFlyAdded(event: FlyAdded ): void {
     user.cycle = cycle.toString();
     user.address = event.transaction.from;
     user.stakedTadpole = event.params.tokenId.toI32();
+    user.points = BigInt.zero();
+
   }
+  const tokenIDx = event.params.tokenId;
+  let contract = TadpoleNFT.bind(TadpoleAddress);
+  const rarity = contract.tadpoles(tokenIDx).value0;
+  const points = event.params.amount.plus((rarity.times(event.params.amount).div(BigInt.fromI32(10))));
+  log.error("Rarity : {}, Points: {}, Amount: {}", [rarity.toString(), points.toString(), event.params.amount.toString()]);
   user.burnedCurrentCycle = user.burnedCurrentCycle.plus(event.params.amount);
+  user.points = user.points.plus(points);
   user.save();
 
 }
@@ -40,6 +52,7 @@ export function handleEntered(event: Entered ): void {
   }
   // enter -> exit case  
   user.burnedCurrentCycle = BigInt.zero();
+  user.points = BigInt.zero();
   user.cycleNumber = cycle;
   user.cycle = cycle.toString();
   user.address = event.transaction.from;
