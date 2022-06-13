@@ -4,7 +4,7 @@ schema:
 dataSources:
   - kind: ethereum
     name: FattestTadpole
-    network: fuji
+    network: avalanche
     source:
       address: "0xD9550a060F2002257c4a30CF0268d9931c9a7d87"
       startBlock: 15989913
