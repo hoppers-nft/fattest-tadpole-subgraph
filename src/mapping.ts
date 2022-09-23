@@ -17,7 +17,7 @@ import { CurrentCycle, Cycle, Competitor } from "../generated/schema"
 export function handleCycleFinished(event: CycleFinished): void {
   IncrementCurrentCycle();
 }
-const TadpoleAddress = Address.fromString("0x9cd44c2e3b059324fA131f117Dec9e89ca1632dF");
+const TadpoleAddress = Address.fromString("0x0e1ce5cd26d67fd416dc6a22eb97d60131d0901b");
 export function handleFlyAdded(event: FlyAdded ): void {
   const cycle = getOrCreateCurrentCycle().cycle;
   const userId = event.transaction.from.toHex() + '_' + cycle.toString();
